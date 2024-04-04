@@ -68,7 +68,6 @@ export const Pseudocode = (userOpts) => {
                 () => (tree, _file) => {
                     visit(tree, "code", (node) => {
                         if (node.lang === opts.codeLang) {
-                            // TODO: Add support for showing line numbers or not and document the option with screenshots of both possible values
                             // Store the code block for later processing
                             latex_blocks.push(node.value);
                             // Transform the code block into an HTML block we can later recognize and replace
