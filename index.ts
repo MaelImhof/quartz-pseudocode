@@ -28,10 +28,20 @@ import { QuartzTransformerPlugin } from "quartz/plugins/types"
  */
 interface PseudocodeOptions {
     /**
+     * The language used in the markdown code block. Used to determine which code blocks should be parsed and rendered.
+     * Default value: 'pseudo'.
+     */
+    codeLang: string,
+    /**
      * Options for the renderer itself. These are a subset of the options that can be passed to the Quartz plugin.
      * See the PseudoRendererOptions type for more details.
      */
-    renderer: PseudoRendererOptions
+    renderer: PseudoRendererOptions|undefined
+}
+
+const defaultOptions: PseudocodeOptions = {
+    codeLang: "pseudo",
+    renderer: undefined
 }
 
 /**
@@ -99,7 +109,10 @@ function renderToString(input: string, options?: PseudoRendererOptions): string 
     return renderer.toMarkup()
 }
 
-export const Pseudocode: QuartzTransformerPlugin<PseudocodeOptions> = (opts?: PseudocodeOptions) => {
+export const Pseudocode: QuartzTransformerPlugin<PseudocodeOptions> = (userOpts?: PseudocodeOptions) => {
+
+    // Merge the default options with the user options
+    const opts = {...defaultOptions, ...userOpts}
 
     /**
      * Used to store the LaTex raw string content in order as they are found in the markdown file.
@@ -113,7 +126,7 @@ export const Pseudocode: QuartzTransformerPlugin<PseudocodeOptions> = (opts?: Ps
             return [
                 () => (tree: MdRoot, _file: VFile) => {
                     visit(tree, "code", (node) => {
-                        if (node.lang === "pseudo") { // TODO: Add support for other language slugs
+                        if (node.lang === opts.codeLang) {
                             // TODO: Add support for showing line numbers or not and document the option with screenshots of both possible values
                             // TODO: Add support for other class names
                             

@@ -9,6 +9,10 @@ import Lexer from "pseudocode/src/Lexer.js";
 import Parser from "pseudocode/src/Parser.js";
 // @ts-ignore
 import Renderer from "pseudocode/src/Renderer.js";
+const defaultOptions = {
+    codeLang: "pseudo",
+    renderer: undefined
+};
 /**
  * Renders a LaTex string to HTML using pseudocode.js
  *
@@ -34,7 +38,9 @@ function renderToString(input, options) {
     }
     return renderer.toMarkup();
 }
-export const Pseudocode = (opts) => {
+export const Pseudocode = (userOpts) => {
+    // Merge the default options with the user options
+    const opts = Object.assign(Object.assign({}, defaultOptions), userOpts);
     /**
      * Used to store the LaTex raw string content in order as they are found in the markdown file.
      * They will be processed in the same order later on to be converted to HTML.
@@ -46,7 +52,7 @@ export const Pseudocode = (opts) => {
             return [
                 () => (tree, _file) => {
                     visit(tree, "code", (node) => {
-                        if (node.lang === "pseudo") { // TODO: Add support for other language slugs
+                        if (node.lang === opts.codeLang) {
                             // TODO: Add support for showing line numbers or not and document the option with screenshots of both possible values
                             // TODO: Add support for other class names
                             // Store the code block for later processing

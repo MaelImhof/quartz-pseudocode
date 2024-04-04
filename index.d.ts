@@ -5,10 +5,15 @@ import { QuartzTransformerPlugin } from "quartz/plugins/types";
  */
 interface PseudocodeOptions {
     /**
+     * The language used in the markdown code block. Used to determine which code blocks should be parsed and rendered.
+     * Default value: 'pseudo'.
+     */
+    codeLang: string;
+    /**
      * Options for the renderer itself. These are a subset of the options that can be passed to the Quartz plugin.
      * See the PseudoRendererOptions type for more details.
      */
-    renderer: PseudoRendererOptions;
+    renderer: PseudoRendererOptions | undefined;
 }
 /**
  * Options of the renderer itself. These are a subset of the options that can be passed to the Quartz plugin.
