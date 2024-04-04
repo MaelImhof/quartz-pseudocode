@@ -50,8 +50,8 @@ function renderToString(input, options) {
 function removeCaptionCount(renderedMarkup, captionValue) {
     // Escape potential special regex characters in the custom caption
     const escapedCaption = captionValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`<span class="ps-keyword">${escapedCaption} [-]?\\d+<\\/span>`, "g");
-    return renderedMarkup.replace(regex, `<span class="ps-keyword">${captionValue}</span>`);
+    const regex = new RegExp(`<span class="ps-keyword">${escapedCaption} [-]?\\d+[ ]?<\\/span>`, "g");
+    return renderedMarkup.replace(regex, `<span class="ps-keyword">${captionValue} </span>`);
 }
 export const Pseudocode = (userOpts) => {
     // Merge the default options with the user options

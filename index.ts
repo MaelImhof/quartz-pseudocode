@@ -135,8 +135,8 @@ function removeCaptionCount(renderedMarkup: string, captionValue: string): strin
     // Escape potential special regex characters in the custom caption
     const escapedCaption = captionValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-    const regex = new RegExp(`<span class="ps-keyword">${escapedCaption} [-]?\\d+<\\/span>`, "g")
-    return renderedMarkup.replace(regex, `<span class="ps-keyword">${captionValue}</span>`)
+    const regex = new RegExp(`<span class="ps-keyword">${escapedCaption} [-]?\\d+[ ]?<\\/span>`, "g")
+    return renderedMarkup.replace(regex, `<span class="ps-keyword">${captionValue} </span>`)
 }
 
 export const Pseudocode: QuartzTransformerPlugin<PseudocodeOptions> = (userOpts?: PseudocodeOptions) => {
