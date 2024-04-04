@@ -207,9 +207,7 @@ You can use this setting to provide a function that will be used to parse the La
 
 ## Credits
 
-Thanks to [@aarnphm](https://github.com/aarnphm) who posted a first version of the plugin on Discord, which I worked from.
-
-Thanks to [@truemogician](https://github.com/truemogician) who created a rehype plugin for pseudocode.js which I used as inspiration.
+Credits have been moved to a [separate file](CREDITS.md) so they don't appear on the NPM registry forever without their consent.
 
 ## Contribute
 
