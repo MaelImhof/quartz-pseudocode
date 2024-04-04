@@ -1,8 +1,8 @@
 {
   "name": "quartz-pseudocode",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "Quartz plugin to render pseudocode at build-time using pseudocode.js. Works transparently with the Obsidian plugin obsidian-pseudocode.",
-  "main": "index.ts",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MaelImhof/quartz-pseudocode.git"
@@ -13,7 +13,7 @@
     "pseudocode",
     "algorithm"
   ],
-  "author": "Maël Imhof",
+  "author": "Maël Imhof <contact@mael.im> (https://www.mael.im)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/MaelImhof/quartz-pseudocode/issues"
