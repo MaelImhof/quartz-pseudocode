@@ -1,7 +1,6 @@
-import { Root as HTMLRoot } from "hast"
+import {Root as HTMLRoot, Literal } from "hast"
 import { Root as MdRoot } from "mdast"
 import { visit } from "unist-util-visit"
-import { Literal } from "hast"
 import { VFile } from "vfile"
 
 /*
