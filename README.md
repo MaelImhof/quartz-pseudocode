@@ -8,12 +8,12 @@ Natively, Quartz does not support pseudocode and algorithm rendering as HTML. Th
 
 ## Installation
 
-> [!NOTE] TODO
+> [!NOTE]
 > This section is not ready yet.
 
 ## Usage
 
-> [!NOTE] TODO
+> [!NOTE]
 > This section is not ready yet.
 
 ## Credits
@@ -24,5 +24,5 @@ Thanks to [@truemogician](https://github.com/truemogician) who created a rehype 
 
 ## Contribute
 
-> [!NOTE] TODO
+> [!NOTE]
 > This section is not ready yet but contributions are welcome. Feel free to open an issue, a discussion or a pull request.
