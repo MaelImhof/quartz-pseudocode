@@ -31,7 +31,13 @@ interface PseudocodeOptions {
      * The language used in the markdown code block. Used to determine which code blocks should be parsed and rendered.
      * Default value: 'pseudo'.
      */
-    codeLang: string,
+    codeLang: string|undefined,
+    /**
+     * When the plugin finds a code block with the specified language, it will replace it with a placeholder HTML block
+     * that will have the specified CSS class.
+     * This value can be changed to avoid conflicts. Default value 'pseudocode-placeholder'.
+     */
+    placeholderCssClass: string|undefined,
     /**
      * Options for the renderer itself. These are a subset of the options that can be passed to the Quartz plugin.
      * See the PseudoRendererOptions type for more details.
@@ -41,6 +47,7 @@ interface PseudocodeOptions {
 
 const defaultOptions: PseudocodeOptions = {
     codeLang: "pseudo",
+    placeholderCssClass: "pseudocode-placeholder",
     renderer: undefined
 }
 
@@ -128,14 +135,13 @@ export const Pseudocode: QuartzTransformerPlugin<PseudocodeOptions> = (userOpts?
                     visit(tree, "code", (node) => {
                         if (node.lang === opts.codeLang) {
                             // TODO: Add support for showing line numbers or not and document the option with screenshots of both possible values
-                            // TODO: Add support for other class names
                             
                             // Store the code block for later processing
                             latex_blocks.push(node.value)
 
                             // Transform the code block into an HTML block we can later recognize and replace
                             node.type = "html" as "code"
-                            node.value = `<pre class="pseudocode-placeholder"></pre>`
+                            node.value = `<pre class="${opts.placeholderCssClass}"></pre>`
                         }
                     })
                 }
@@ -145,7 +151,7 @@ export const Pseudocode: QuartzTransformerPlugin<PseudocodeOptions> = (userOpts?
             return [
                 () => (tree: HTMLRoot, _file: VFile) => {
                     visit(tree, "raw", (raw: Literal) => {
-                        if (raw.value !== `<pre class="pseudocode-placeholder"></pre>`) {
+                        if (raw.value !== `<pre class="${opts.placeholderCssClass}"></pre>`) {
                             return
                         }
 

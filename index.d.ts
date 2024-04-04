@@ -8,7 +8,13 @@ interface PseudocodeOptions {
      * The language used in the markdown code block. Used to determine which code blocks should be parsed and rendered.
      * Default value: 'pseudo'.
      */
-    codeLang: string;
+    codeLang: string | undefined;
+    /**
+     * When the plugin finds a code block with the specified language, it will replace it with a placeholder HTML block
+     * that will have the specified CSS class.
+     * This value can be changed to avoid conflicts. Default value 'pseudocode-placeholder'.
+     */
+    placeholderCssClass: string | undefined;
     /**
      * Options for the renderer itself. These are a subset of the options that can be passed to the Quartz plugin.
      * See the PseudoRendererOptions type for more details.

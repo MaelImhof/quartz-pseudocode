@@ -11,6 +11,7 @@ import Parser from "pseudocode/src/Parser.js";
 import Renderer from "pseudocode/src/Renderer.js";
 const defaultOptions = {
     codeLang: "pseudo",
+    placeholderCssClass: "pseudocode-placeholder",
     renderer: undefined
 };
 /**
@@ -54,12 +55,11 @@ export const Pseudocode = (userOpts) => {
                     visit(tree, "code", (node) => {
                         if (node.lang === opts.codeLang) {
                             // TODO: Add support for showing line numbers or not and document the option with screenshots of both possible values
-                            // TODO: Add support for other class names
                             // Store the code block for later processing
                             latex_blocks.push(node.value);
                             // Transform the code block into an HTML block we can later recognize and replace
                             node.type = "html";
-                            node.value = `<pre class="pseudocode-placeholder"></pre>`;
+                            node.value = `<pre class="${opts.placeholderCssClass}"></pre>`;
                         }
                     });
                 }
@@ -69,7 +69,7 @@ export const Pseudocode = (userOpts) => {
             return [
                 () => (tree, _file) => {
                     visit(tree, "raw", (raw) => {
-                        if (raw.value !== `<pre class="pseudocode-placeholder"></pre>`) {
+                        if (raw.value !== `<pre class="${opts.placeholderCssClass}"></pre>`) {
                             return;
                         }
                         const value = latex_blocks.shift();
