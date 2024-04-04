@@ -1,15 +1,26 @@
+import { visit } from "unist-util-visit";
+/*
+ * The three following lines are marked to be ignored by TypeScript because the pseudocode.js library does not
+ * provide a type definition file.
+ */
 // @ts-ignore
 import Lexer from "pseudocode/src/Lexer.js";
 // @ts-ignore
 import Parser from "pseudocode/src/Parser.js";
 // @ts-ignore
 import Renderer from "pseudocode/src/Renderer.js";
-import { visit } from "unist-util-visit";
-const latex_blocks = [];
+/**
+ * Renders a LaTex string to HTML using pseudocode.js
+ *
+ * Stolen code from https://www.npmjs.com/package/rehype-pseudo/v/1.0.2
+ *
+ * @param input The LaTex string to be parsed and rendered
+ * @param options The options to be passed to the renderer (see PseudoRendererOptions)
+ * @returns The rendered HTML string
+ */
 function renderToString(input, options) {
     var _a, _b, _c, _d;
     var _e, _f, _g;
-    // Use String.isNullOrEmpty instead of !input
     if (!input)
         throw new Error("Input cannot be empty");
     const lexer = new Lexer(input);
@@ -24,6 +35,11 @@ function renderToString(input, options) {
     return renderer.toMarkup();
 }
 export const Pseudocode = (opts) => {
+    /**
+     * Used to store the LaTex raw string content in order as they are found in the markdown file.
+     * They will be processed in the same order later on to be converted to HTML.
+     */
+    const latex_blocks = [];
     return {
         name: "Pseudocode",
         markdownPlugins() {
@@ -51,7 +67,7 @@ export const Pseudocode = (opts) => {
                             return;
                         }
                         const value = latex_blocks.shift();
-                        const markup = renderToString(value, opts);
+                        const markup = renderToString(value, opts === null || opts === void 0 ? void 0 : opts.renderer);
                         // TODO: Add a way to remove the algorithm number in the title
                         raw.value = markup;
                     });

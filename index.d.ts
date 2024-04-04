@@ -1,5 +1,22 @@
 import { QuartzTransformerPlugin } from "quartz/plugins/types";
-interface PseudoOptions {
+/**
+ * Options type for the quartz-pseudocode plugin. Can be passed to the plugin in quartz.config.ts to
+ * customize the rendering of pseudocode.
+ */
+interface PseudocodeOptions {
+    /**
+     * Options for the renderer itself. These are a subset of the options that can be passed to the Quartz plugin.
+     * See the PseudoRendererOptions type for more details.
+     */
+    renderer: PseudoRendererOptions;
+}
+/**
+ * Options of the renderer itself. These are a subset of the options that can be passed to the Quartz plugin.
+ * See the PseudocodeOptions type for the full list of options.
+ *
+ * Stolen code from https://www.npmjs.com/package/rehype-pseudo/v/1.0.2, originally called PseudoOptions
+ */
+interface PseudoRendererOptions {
     /**
      * The indent size of inside a control block, e.g. if, for, etc. The unit must be in 'em'. Default value: '1.2em'.
      */
@@ -31,5 +48,5 @@ interface PseudoOptions {
     mathEngine?: "katex" | "mathjax";
     mathRenderer?: (input: string) => string;
 }
-export declare const Pseudocode: QuartzTransformerPlugin<PseudoOptions>;
+export declare const Pseudocode: QuartzTransformerPlugin<PseudocodeOptions>;
 export {};
