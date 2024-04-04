@@ -8,12 +8,10 @@ import Renderer from "pseudocode/src/Renderer.js"
 import { QuartzTransformerPlugin } from "quartz/plugins/types"
 import { Root as MdRoot } from "mdast"
 import { visit } from "unist-util-visit"
-import { unified } from "unified"
-import parseHtml from "rehype-parse"
 import { Literal } from "hast"
 
 // TODO: Adapt the options to the plugin
-export interface PseudoOptions {
+interface PseudoOptions {
 	/**
 	 * The indent size of inside a control block, e.g. if, for, etc. The unit must be in 'em'. Default value: '1.2em'.
 	 */
@@ -67,7 +65,6 @@ function renderToString(input: string, options?: PseudoOptions): string {
 }
 
 export const Pseudocode: QuartzTransformerPlugin<PseudoOptions> = (opts?: PseudoOptions) => {
-    const parser = unified().use(parseHtml, { fragment: true })
     return {
         name: "Pseudocode",
         markdownPlugins() {
@@ -98,7 +95,7 @@ export const Pseudocode: QuartzTransformerPlugin<PseudoOptions> = (opts?: Pseudo
                         }
 
                         const value = latex_blocks.shift()
-                        const markup = renderToString(value!, { captionCount: undefined, lineNumber: true, lineNumberPunc: "", noEnd: true })
+                        const markup = renderToString(value!, opts)
                         // TODO: Add a way to remove the algorithm number in the title
                         raw.value = markup
                     })

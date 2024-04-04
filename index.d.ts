@@ -1,6 +1,5 @@
-// @ts-ignore
 import { QuartzTransformerPlugin } from "quartz/plugins/types";
-export interface PseudoOptions {
+interface PseudoOptions {
     /**
      * The indent size of inside a control block, e.g. if, for, etc. The unit must be in 'em'. Default value: '1.2em'.
      */
@@ -33,3 +32,4 @@ export interface PseudoOptions {
     mathRenderer?: (input: string) => string;
 }
 export declare const Pseudocode: QuartzTransformerPlugin<PseudoOptions>;
+export {};

@@ -5,8 +5,6 @@ import Parser from "pseudocode/src/Parser.js";
 // @ts-ignore
 import Renderer from "pseudocode/src/Renderer.js";
 import { visit } from "unist-util-visit";
-import { unified } from "unified";
-import parseHtml from "rehype-parse";
 const latex_blocks = [];
 function renderToString(input, options) {
     var _a, _b, _c, _d;
@@ -26,7 +24,6 @@ function renderToString(input, options) {
     return renderer.toMarkup();
 }
 export const Pseudocode = (opts) => {
-    const parser = unified().use(parseHtml, { fragment: true });
     return {
         name: "Pseudocode",
         markdownPlugins() {
@@ -54,7 +51,7 @@ export const Pseudocode = (opts) => {
                             return;
                         }
                         const value = latex_blocks.shift();
-                        const markup = renderToString(value, { captionCount: undefined, lineNumber: true, lineNumberPunc: "", noEnd: true });
+                        const markup = renderToString(value, opts);
                         // TODO: Add a way to remove the algorithm number in the title
                         raw.value = markup;
                     });
