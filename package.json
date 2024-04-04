@@ -1,6 +1,6 @@
 {
   "name": "quartz-pseudocode",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Quartz plugin to render pseudocode at build-time using pseudocode.js. Works transparently with the Obsidian plugin obsidian-pseudocode.",
   "main": "index.js",
   "type": "module",
@@ -30,6 +30,7 @@
   "dependencies": {
     "hast": "^1.0.0",
     "mdast": "^3.0.0",
+    "pseudocode": "^2.4.1",
     "rehype-parse": "^9.0.0",
     "unified": "^11.0.4",
     "unist-util-visit": "^5.0.0"
