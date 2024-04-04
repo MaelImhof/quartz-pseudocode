@@ -8,7 +8,14 @@ Natively, Quartz does not support pseudocode and algorithm rendering as HTML. Th
 
 ## Table of Contents
 
-
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Recommendation for Editing](#recommendation-for-editing)
+  - [Syntax](#syntax)
+  - [Example](#example)
+  - [Configuration](#configuration)
+- [Credits](#credits)
+- [Contribute](#contribute)
 
 ## Installation
 
