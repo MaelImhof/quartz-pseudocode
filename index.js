@@ -12,6 +12,7 @@ import Renderer from "pseudocode/src/Renderer.js";
 const defaultOptions = {
     codeLang: "pseudo",
     placeholderCssClass: "pseudocode-placeholder",
+    removeCaptionCount: false,
     renderer: undefined
 };
 /**
@@ -38,6 +39,19 @@ function renderToString(input, options) {
         (_d = (_g = renderer.backend.driver).renderToString) !== null && _d !== void 0 ? _d : (_g.renderToString = options === null || options === void 0 ? void 0 : options.mathRenderer);
     }
     return renderer.toMarkup();
+}
+/**
+ * Experimental feature to remove the caption count from the title of the rendered pseudocode using a RegEx.
+ *
+ * @param renderedMarkup The HTML markup that was generated from LaTex by pseudocode.js
+ * @param captionValue The value used for the title of the rendered pseudocode (by default 'Algorithm')
+ * @returns The HTML markup without the caption count
+ */
+function removeCaptionCount(renderedMarkup, captionValue) {
+    // Escape potential special regex characters in the custom caption
+    const escapedCaption = captionValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`<span class="ps-keyword">${escapedCaption} [-]?\\d+<\\/span>`, "g");
+    return renderedMarkup.replace(regex, `<span class="ps-keyword">${captionValue}</span>`);
 }
 export const Pseudocode = (userOpts) => {
     // Merge the default options with the user options
@@ -69,13 +83,18 @@ export const Pseudocode = (userOpts) => {
             return [
                 () => (tree, _file) => {
                     visit(tree, "raw", (raw) => {
+                        var _a, _b;
                         if (raw.value !== `<pre class="${opts.placeholderCssClass}"></pre>`) {
                             return;
                         }
                         const value = latex_blocks.shift();
                         const markup = renderToString(value, opts === null || opts === void 0 ? void 0 : opts.renderer);
-                        // TODO: Add a way to remove the algorithm number in the title
-                        raw.value = markup;
+                        if (opts.removeCaptionCount) {
+                            raw.value = removeCaptionCount(markup, (_b = (_a = opts === null || opts === void 0 ? void 0 : opts.renderer) === null || _a === void 0 ? void 0 : _a.titlePrefix) !== null && _b !== void 0 ? _b : "Algorithm");
+                        }
+                        else {
+                            raw.value = markup;
+                        }
                     });
                 }
             ];

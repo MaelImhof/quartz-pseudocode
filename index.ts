@@ -39,6 +39,13 @@ interface PseudocodeOptions {
      */
     placeholderCssClass: string|undefined,
     /**
+     * By default, pseudocode.js will add a count to the title of the algorithms you
+     * write in pseudocode. The title will be "Algorithm 1", "Algorithm 2", and so on.
+     * If set to true, this option remove the count, so the title will be just "Algorithm".
+     * Default value: false.
+     */
+    removeCaptionCount: boolean|undefined,
+    /**
      * Options for the renderer itself. These are a subset of the options that can be passed to the Quartz plugin.
      * See the PseudoRendererOptions type for more details.
      */
@@ -48,6 +55,7 @@ interface PseudocodeOptions {
 const defaultOptions: PseudocodeOptions = {
     codeLang: "pseudo",
     placeholderCssClass: "pseudocode-placeholder",
+    removeCaptionCount: false,
     renderer: undefined
 }
 
@@ -116,6 +124,21 @@ function renderToString(input: string, options?: PseudoRendererOptions): string 
     return renderer.toMarkup()
 }
 
+/**
+ * Experimental feature to remove the caption count from the title of the rendered pseudocode using a RegEx.
+ * 
+ * @param renderedMarkup The HTML markup that was generated from LaTex by pseudocode.js
+ * @param captionValue The value used for the title of the rendered pseudocode (by default 'Algorithm')
+ * @returns The HTML markup without the caption count
+ */
+function removeCaptionCount(renderedMarkup: string, captionValue: string): string {
+    // Escape potential special regex characters in the custom caption
+    const escapedCaption = captionValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+    const regex = new RegExp(`<span class="ps-keyword">${escapedCaption} [-]?\\d+<\\/span>`, "g")
+    return renderedMarkup.replace(regex, `<span class="ps-keyword">${captionValue}</span>`)
+}
+
 export const Pseudocode: QuartzTransformerPlugin<PseudocodeOptions> = (userOpts?: PseudocodeOptions) => {
 
     // Merge the default options with the user options
@@ -157,8 +180,12 @@ export const Pseudocode: QuartzTransformerPlugin<PseudocodeOptions> = (userOpts?
 
                         const value = latex_blocks.shift()
                         const markup = renderToString(value!, opts?.renderer)
-                        // TODO: Add a way to remove the algorithm number in the title
-                        raw.value = markup
+                        if (opts.removeCaptionCount) {
+                            raw.value = removeCaptionCount(markup, opts?.renderer?.titlePrefix ?? "Algorithm")
+                        }
+                        else {
+                            raw.value = markup
+                        }
                     })
                 }
             ]

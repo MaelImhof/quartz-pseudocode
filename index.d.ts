@@ -16,6 +16,13 @@ interface PseudocodeOptions {
      */
     placeholderCssClass: string | undefined;
     /**
+     * By default, pseudocode.js will add a count to the title of the algorithms you
+     * write in pseudocode. The title will be "Algorithm 1", "Algorithm 2", and so on.
+     * If set to true, this option remove the count, so the title will be just "Algorithm".
+     * Default value: false.
+     */
+    removeCaptionCount: boolean | undefined;
+    /**
      * Options for the renderer itself. These are a subset of the options that can be passed to the Quartz plugin.
      * See the PseudoRendererOptions type for more details.
      */
