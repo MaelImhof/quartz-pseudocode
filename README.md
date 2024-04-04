@@ -23,7 +23,10 @@ Here is how to install the plugin and make it render pseudocode:
 
 1) Make sure you have a working Quartz 4 installation (see instructions [here](https://quartz.jzhao.xyz/#-get-started))
 2) Open a terminal at the root of your Quartz 4 installation (the folder that contains `quartz.config.ts`)
-3) Run the command `npm install git+https://github.com/MaelImhof/quartz-pseudocode.git`
+3) Run the command:
+```shell
+npm install quartz-pseudocode
+```
 4) Wait for the installation to finish. Do not close the terminal until then.
 5) Once the installation is finished, we still need to enable the plugin (tell Quartz we want to use it). To do this, open the file `quartz.config.ts` in a text editor.
 6) Add this line among the other `import lines` (the order does not matter, you can add this as the last one).
