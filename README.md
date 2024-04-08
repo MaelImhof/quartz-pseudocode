@@ -162,7 +162,7 @@ Defaults to `1.2em`.
 
 #### `renderer.commentDelimiter` (`string`)
 
-he delimiters used to start and end a comment region. Note that only line comments are supported.
+The delimiters used to start and end a comment region. Note that only line comments are supported.
 
 Defaults to `//`.
 
