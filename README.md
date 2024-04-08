@@ -84,12 +84,12 @@ Writing this in your markdown file:
 	\Procedure{Simple-Algorithm}{$n$}
 		\If{$n = 0$}
 			\Return $n$
-        \EndIf
-        \For{$i = 0$ \To $n$}
-	        \State $n \gets n-1$
-        \EndFor
-        \Return n
-    \EndProcedure
+    \EndIf
+    \For{$i = 0$ \To $n$}
+	    \State $n \gets n-1$
+    \EndFor
+    \Return n
+  \EndProcedure
 \end{algorithmic}
 \end{algorithm}
 ```
