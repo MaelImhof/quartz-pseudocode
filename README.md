@@ -182,7 +182,7 @@ Defaults to `false`.
 
 If set to `true`, block endings (`end if`, `end for`, `end procedures`, ...) will not be displayed.
 
-Defaults to `false`.
+Defaults to `false` (block endings will be displayed by default).
 
 #### `renderer.captionCount`
 
