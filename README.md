@@ -192,7 +192,9 @@ Related to the number displayed in the title of the pseudocode.
 
 If its value is set, the counter will be reset at each rendering, so all rendered pseudocode blocks will have the same number. If the value is `0`, for example, all algorithms will have `1` displayed.
 
-Defaults to `undefined`.
+Defaults to `undefined`. By default, the counter will start at `0`. The first rendered algorithm will have the number `1`, then the counter will increment and the second algorithm will have the number `2`, and so on.
+
+If you do not want to display any number, see [`removeCaptionCount`](#removecaptioncount-boolean).
 
 #### `renderer.titlePrefix`
 
