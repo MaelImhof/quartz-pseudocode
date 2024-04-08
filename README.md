@@ -172,7 +172,7 @@ The punctuation that follows line number.
 
 Defaults to `:`.
 
-#### `renderer.lineNmber` (`boolean`)
+#### `renderer.lineNumber` (`boolean`)
 
 Whether line numbers will be displayed on the left of the pseudocode.
 
