@@ -1,4 +1,4 @@
-import { QuartzTransformerPlugin } from "quartz/plugins/types";
+import { Plugin } from "quartz-api";
 /**
  * Options type for the quartz-pseudocode plugin. Can be passed to the plugin in quartz.config.ts to
  * customize the rendering of pseudocode.
@@ -66,5 +66,5 @@ interface PseudoRendererOptions {
     mathEngine?: "katex" | "mathjax";
     mathRenderer?: (input: string) => string;
 }
-export declare const Pseudocode: QuartzTransformerPlugin<PseudocodeOptions>;
+export declare const Pseudocode: Plugin.QuartzTransformerPlugin<PseudocodeOptions>;
 export {};

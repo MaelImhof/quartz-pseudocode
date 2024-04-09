@@ -25,18 +25,16 @@ const defaultOptions = {
  * @returns The rendered HTML string
  */
 function renderToString(input, options) {
-    var _a, _b, _c, _d;
-    var _e, _f, _g;
     if (!input)
         throw new Error("Input cannot be empty");
     const lexer = new Lexer(input);
     const parser = new Parser(lexer);
     const renderer = new Renderer(parser, options);
-    if ((options === null || options === void 0 ? void 0 : options.mathEngine) || (options === null || options === void 0 ? void 0 : options.mathRenderer)) {
-        (_a = renderer.backend) !== null && _a !== void 0 ? _a : (renderer.backend = {});
-        (_b = (_e = renderer.backend).name) !== null && _b !== void 0 ? _b : (_e.name = options === null || options === void 0 ? void 0 : options.mathEngine);
-        (_c = (_f = renderer.backend).driver) !== null && _c !== void 0 ? _c : (_f.driver = {});
-        (_d = (_g = renderer.backend.driver).renderToString) !== null && _d !== void 0 ? _d : (_g.renderToString = options === null || options === void 0 ? void 0 : options.mathRenderer);
+    if (options?.mathEngine || options?.mathRenderer) {
+        renderer.backend ??= {};
+        renderer.backend.name ??= options?.mathEngine;
+        renderer.backend.driver ??= {};
+        renderer.backend.driver.renderToString ??= options?.mathRenderer;
     }
     return renderer.toMarkup();
 }
@@ -55,7 +53,7 @@ function removeCaptionCount(renderedMarkup, captionValue) {
 }
 export const Pseudocode = (userOpts) => {
     // Merge the default options with the user options
-    const opts = Object.assign(Object.assign({}, defaultOptions), userOpts);
+    const opts = { ...defaultOptions, ...userOpts };
     /**
      * Used to store the LaTex raw string content in order as they are found in the markdown file.
      * They will be processed in the same order later on to be converted to HTML.
@@ -82,14 +80,13 @@ export const Pseudocode = (userOpts) => {
             return [
                 () => (tree, _file) => {
                     visit(tree, "raw", (raw) => {
-                        var _a, _b;
                         if (raw.value !== `<pre class="${opts.placeholderCssClass}"></pre>`) {
                             return;
                         }
                         const value = latex_blocks.shift();
-                        const markup = renderToString(value, opts === null || opts === void 0 ? void 0 : opts.renderer);
+                        const markup = renderToString(value, opts?.renderer);
                         if (opts.removeCaptionCount) {
-                            raw.value = removeCaptionCount(markup, (_b = (_a = opts === null || opts === void 0 ? void 0 : opts.renderer) === null || _a === void 0 ? void 0 : _a.titlePrefix) !== null && _b !== void 0 ? _b : "Algorithm");
+                            raw.value = removeCaptionCount(markup, opts?.renderer?.titlePrefix ?? "Algorithm");
                         }
                         else {
                             raw.value = markup;

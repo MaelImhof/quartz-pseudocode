@@ -1,9 +1,17 @@
 {
     "compilerOptions": {
-      "target": "es6",
+      "target": "esnext",
       "module": "ESNext",
       "declaration": true,
       "strict": true,
       "moduleResolution":"node",
+      "incremental": true,
+      "resolveJsonModule": true,
+      "skipLibCheck": true,
+      "allowSyntheticDefaultImports": true,
+      "forceConsistentCasingInFileNames": true,
+      "esModuleInterop": true,
+      "jsx": "react-jsx",
+      "jsxImportSource": "preact"
     }
   }
