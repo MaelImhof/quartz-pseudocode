@@ -1,4 +1,4 @@
-import { Plugin } from "quartz-api";
+import { Plugin } from "@quartz-md/api";
 /**
  * Options type for the quartz-pseudocode plugin. Can be passed to the plugin in quartz.config.ts to
  * customize the rendering of pseudocode.
