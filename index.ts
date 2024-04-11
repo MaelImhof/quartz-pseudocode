@@ -14,12 +14,7 @@ import Parser from "pseudocode/src/Parser.js"
 // @ts-ignore
 import Renderer from "pseudocode/src/Renderer.js"
 
-/*
- * The following line is marked to be ignored by TypeScript because Quartz does not provide a separated type
- * definition file yet.
- */
-// @ts-ignore
-import { QuartzTransformerPlugin } from "quartz/plugins/types"
+import { Plugin } from "@quartz-md/api"
 
 /**
  * Options type for the quartz-pseudocode plugin. Can be passed to the plugin in quartz.config.ts to
@@ -138,7 +133,7 @@ function removeCaptionCount(renderedMarkup: string, captionValue: string): strin
     return renderedMarkup.replace(regex, `<span class="ps-keyword">${captionValue} </span>`)
 }
 
-export const Pseudocode: QuartzTransformerPlugin<PseudocodeOptions> = (userOpts?: PseudocodeOptions) => {
+export const Pseudocode: Plugin.QuartzTransformerPlugin<PseudocodeOptions> = (userOpts?: PseudocodeOptions) => {
 
     // Merge the default options with the user options
     const opts = {...defaultOptions, ...userOpts}
