@@ -12,6 +12,7 @@
       "forceConsistentCasingInFileNames": true,
       "esModuleInterop": true,
       "jsx": "react-jsx",
-      "jsxImportSource": "preact"
+      "jsxImportSource": "preact",
+      "outDir": "lib/"
     }
   }

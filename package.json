@@ -18,18 +18,14 @@
   "bugs": {
     "url": "https://github.com/MaelImhof/quartz-pseudocode/issues"
   },
-  "main": "index.js",
+  "main": "lib/index.js",
   "type": "module",
   "scripts": {
     "build": "npx tsc --declaration"
   },
   "files": [
-    "index.d.ts",
-    "index.js",
-    "index.ts",
-    "LICENSE",
-    "package.json",
-    "README.md"
+    "**/*.ts",
+    "**/*.tsx"
   ],
   "devDependencies": {
     "@types/node": "^20.12.6",
