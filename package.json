@@ -37,13 +37,10 @@
   },
   "dependencies": {
     "pseudocode": "^2.4.1",
-    "@quartz-md/api": "git://github.com/OCDkirby/quartz-api#main",
+    "@quartz-md/api": "git://github.com/OCDkirby/quartz-api.git#TestInProd",
     "rehype": "^13.0.1",
     "remark": "^15.0.1",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.1"
-  },
-  "peerDependencies": {
-    "quartz": "git://github.com/jackyzha0/quartz.git#semver:^4.0.0"
   }
 }
