@@ -21,7 +21,8 @@
   "main": "lib/index.js",
   "type": "module",
   "scripts": {
-    "build": "npx tsc --declaration"
+    "build": "npx tsc --declaration",
+    "prepublish": "npm run build"
   },
   "files": [
     "**/*.ts",
