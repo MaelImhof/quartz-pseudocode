@@ -18,24 +18,23 @@
   "bugs": {
     "url": "https://github.com/MaelImhof/quartz-pseudocode/issues"
   },
-  "main": "index.js",
+  "main": "lib/index.js",
   "type": "module",
   "scripts": {
-    "build": "npx tsc --declaration"
+    "build": "npx tsc --declaration",
+    "prepublish": "npm run build"
   },
   "files": [
-    "index.d.ts",
-    "index.js",
-    "index.ts",
-    "LICENSE",
-    "package.json",
-    "README.md"
+    "**/*.ts",
+    "**/*.tsx"
   ],
   "devDependencies": {
+    "@types/node": "^20.12.6",
     "typescript": "^5.4.3"
   },
   "dependencies": {
     "pseudocode": "^2.4.1",
+    "@quartz-md/api": "git://github.com/OCDkirby/quartz-api.git#TestInProd",
     "rehype": "^13.0.1",
     "remark": "^15.0.1",
     "unist-util-visit": "^5.0.0",
