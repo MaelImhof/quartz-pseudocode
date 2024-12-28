@@ -1,5 +1,14 @@
 # Quartz Pseudocode
 
+> [!CAUTION]
+> Last time I checked, **this plugin does not work anymore** and requires some debugging. I do not need the plugin anymore and lack time to maintain it.
+>
+> Please feel free to fork or something and maintain your own, working version of the plugin.
+>
+> I suspect the main idea of the plugin still holds, and the debugging should be quite trivial (if Quartz hasn't had too drastic changes).
+>
+> Have a nice one!
+
 [Quartz](https://quartz.jzhao.xyz/) is a fast, batteries-included static-site generator that transforms Markdown content into fully functional websites.
 
 In particular, Quartz supports transforming your [Obsidian](https://obsidian.md/) notes into a static website.
